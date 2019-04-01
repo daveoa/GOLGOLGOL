@@ -5,15 +5,32 @@ namespace GOL.Engine
 {
     public class GOLEngine
     {
+        ConsoleWindow console;
+        Displayer display;
+        Board grid; // 'Game' 
+
+        public GOLEngine()
+        {
+            console = new ConsoleWindow();
+            display = new Displayer();
+            grid = new Board(); //substitute with 'Game' later
+        }
+
         public void Start()
         {
-            ConsoleWindow console = new ConsoleWindow();
-            Displayer display = new Displayer();
-            Board grid = new Board();
-
             console.ConfigureConsole();
+            //display.DisplayBoard(grid);
+            //display.DisplayCellCreation(grid);
+            //display.DisplayNewGameIteration(grid);
+        }
+        public void Create()
+        {
             display.DisplayBoard(grid);
             display.DisplayCellCreation(grid);
+        }
+
+        public void Running()
+        {
             display.DisplayNewGameIteration(grid);
         }
     }

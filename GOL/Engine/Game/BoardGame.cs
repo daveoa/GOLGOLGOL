@@ -1,15 +1,17 @@
-﻿namespace GOL
+﻿using static GOL.ConfigSettings.DimensionValues;
+
+namespace GOL
 {
     public class BoardGame
     {
         public void NewBoardCreation(Board grid)
         {
             BoardInput gridInput = new BoardInput();
-            bool[,] tempBoard = new bool[(int)ConfigSettings.DimensionValues.BoardWidth, (int)ConfigSettings.DimensionValues.BoardHeight];
+            bool[,] tempBoard = new bool[(int)BoardWidth, (int)BoardHeight];
 
-            for (int y = 0; y < (int)ConfigSettings.DimensionValues.BoardHeight; y++)
+            for (int y = 0; y < (int)BoardHeight; y++)
             {
-                for (int x = 0; x < (int)ConfigSettings.DimensionValues.BoardWidth; x++)
+                for (int x = 0; x < (int)BoardWidth; x++)
                 {
                     int neighbourCount = _LiveNeighbourCount(x, y, grid);
                     bool cellIsAlive = grid.GetValue(x, y);
@@ -25,9 +27,9 @@
                 }
             }
 
-            for (int y = 0; y < (int)ConfigSettings.DimensionValues.BoardHeight; y++)
+            for (int y = 0; y < (int)BoardHeight; y++)
             {
-                for (int x = 0; x < (int)ConfigSettings.DimensionValues.BoardWidth; x++)
+                for (int x = 0; x < (int)BoardWidth; x++)
                 {
                     if (tempBoard[x, y])
                         gridInput.AddNewAliveCell(x, y, grid);

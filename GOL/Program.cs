@@ -11,15 +11,8 @@ namespace GOL
         {
             GOLEngine engine = new GOLEngine();
             engine.Start();
-
-            //Board grid = new Board();
-            //ConsoleOutput.DisplayBoard(grid);
-            //ConsoleInput.CreateCells(grid);
-
-
-            //Console.WriteLine("\nPress Esc anytime to stop");
-            //Thread.Sleep(ConfigSettings.Delay);
-
+            engine.Create();
+            engine.Running();
             //while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Escape)
             //{
             //    BoardGame.NewBoardCalcuation(grid);
