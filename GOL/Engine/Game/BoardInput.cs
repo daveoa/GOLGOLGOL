@@ -1,4 +1,4 @@
-﻿namespace GOL
+﻿namespace GOL.Game
 {
     class BoardInput
     {

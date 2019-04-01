@@ -13,12 +13,6 @@ namespace GOL
             engine.Start();
             engine.Create();
             engine.Running();
-            //while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Escape)
-            //{
-            //    BoardGame.NewBoardCalcuation(grid);
-            //    ConsoleOutput.DisplayBoard(grid);
-            //    Thread.Sleep(ConfigSettings.Delay);
-            //}
             //Console.WriteLine("Save current iteration? (y/n)");
             //if (Console.ReadKey().KeyChar == 'y')
             //{

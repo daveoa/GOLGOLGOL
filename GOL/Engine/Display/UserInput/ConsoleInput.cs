@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GOL
+namespace GOL.Engine.Display.UserInput
 {
     public class ConsoleInput
     {

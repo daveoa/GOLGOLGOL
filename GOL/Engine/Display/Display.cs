@@ -1,10 +1,7 @@
 ﻿using GOL.Engine.Display.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using GOL.Engine.Display.UserInput;
+using GOL.Engine.Display.UserOutput;
+using GOL.Game;
 
 namespace GOL.Engine.Display
 {
@@ -17,14 +14,14 @@ namespace GOL.Engine.Display
             CoordinateInput coord = new CoordinateInput();
             BoardInput gridEdit = new BoardInput();
 
-            show.OutputStringToConsole("\nCreate new cells");
+            show.OutputStringToConsole(ConfigSettings.CellCreationNotification);
             do
             {
-                int x = coord.SetCoordinate("x");
-                int y = coord.SetCoordinate("y");
+                int x = coord.SetCoordinate(ConfigSettings.XCoordinate);
+                int y = coord.SetCoordinate(ConfigSettings.YCoordinate);
                 gridEdit.AddNewAliveCell(x, y, grid);
                 DisplayBoard(grid);
-                show.OutputStringToConsole("Make another cell? (y/n)");
+                show.OutputStringToConsole(ConfigSettings.CellCreationInquiry);
             } while (post.GetUserInputKey() == 'y');
             DisplayBoard(grid);
         }
@@ -35,18 +32,6 @@ namespace GOL.Engine.Display
             ConsoleOutput outputter = new ConsoleOutput();
             outputter.OutputStringToConsoleDefaultPos(stringdBoard.ConvertToString(grid));
         }
-
-        public void DisplayNewGameIteration(Board grid)
-        {
-            ConsoleInput esc = new ConsoleInput();
-            BoardGame gridUpdate = new BoardGame();
-
-            while (esc.ReadEscapeKeyPress())
-            {
-                gridUpdate.NewBoardCreation(grid);
-                DisplayBoard(grid);
-                Thread.Sleep(ConfigSettings.Delay);
-            }
-        }
+        
     }
 }

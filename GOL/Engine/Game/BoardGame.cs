@@ -1,6 +1,6 @@
 ﻿using static GOL.ConfigSettings.DimensionValues;
 
-namespace GOL
+namespace GOL.Game
 {
     public class BoardGame
     {

@@ -1,4 +1,7 @@
-﻿namespace GOL.Engine.Display.Helper
+﻿using GOL.Engine.Display.UserInput;
+using GOL.Engine.Display.UserOutput;
+
+namespace GOL.Engine.Display.Helper
 {
     class CoordinateInput
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GOL.Engine.Display.UserOutput;
+using System;
 
 namespace GOL.Engine.Display.Helper
 {
@@ -21,7 +22,7 @@ namespace GOL.Engine.Display.Helper
             }
             catch (Exception)
             {
-                show.OutputStringToConsole("Incorrect input");
+                show.OutputStringToConsole(ConfigSettings.InvalidInput);
                 return -1;
             }
             return x;

@@ -1,6 +1,7 @@
-﻿using System.Text;
+﻿using GOL.Game;
+using System.Text;
 
-namespace GOL
+namespace GOL.Engine.Display.Helper
 {
     public class BoardToStringBuilder
     {
