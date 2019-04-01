@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GOL.Engine;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,20 +9,23 @@ namespace GOL
     {
         static void Main(string[] args)
         {
-            Board grid = new Board();
-            ConsoleOutput.DisplayBoard(grid);
-            ConsoleInput.CreateCells(grid);
+            GOLEngine engine = new GOLEngine();
+            engine.Start();
 
-            Console.WriteLine("\nPress Esc anytime to stop");
-            Thread.Sleep(ConfigSettings.Delay * 2);
+            //Board grid = new Board();
+            //ConsoleOutput.DisplayBoard(grid);
+            //ConsoleInput.CreateCells(grid);
 
-            while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Escape)
-            {
-                //grid = BoardGame.NewBoardCalcuation(grid);
-                BoardGame.NewBoardCalcuation(grid);
-                ConsoleOutput.DisplayBoard(grid);
-                Thread.Sleep(ConfigSettings.Delay);
-            }
+
+            //Console.WriteLine("\nPress Esc anytime to stop");
+            //Thread.Sleep(ConfigSettings.Delay);
+
+            //while (!Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Escape)
+            //{
+            //    BoardGame.NewBoardCalcuation(grid);
+            //    ConsoleOutput.DisplayBoard(grid);
+            //    Thread.Sleep(ConfigSettings.Delay);
+            //}
             //Console.WriteLine("Save current iteration? (y/n)");
             //if (Console.ReadKey().KeyChar == 'y')
             //{

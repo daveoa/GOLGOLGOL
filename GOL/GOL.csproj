@@ -43,16 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardGame.cs" />
+    <Compile Include="Engine\Display\Display.cs" />
+    <Compile Include="Engine\Display\Helper\BoardToStringBuilder.cs" />
+    <Compile Include="Engine\Display\Helper\CoordinateInput.cs" />
+    <Compile Include="Engine\Display\Helper\CoordinateValidator.cs" />
+    <Compile Include="Engine\Game\BoardGame.cs" />
+    <Compile Include="Engine\Game\BoardInput.cs" />
     <Compile Include="ConfigSettings.cs" />
-    <Compile Include="ConsoleInput.cs" />
-    <Compile Include="ConsoleOutput.cs" />
-    <Compile Include="Board.cs" />
+    <Compile Include="Engine\Display\UserInput\ConsoleInput.cs" />
+    <Compile Include="Engine\Display\UserOutput\ConsoleOutput.cs" />
+    <Compile Include="Engine\Game\Board.cs" />
+    <Compile Include="ConsoleWindow.cs" />
+    <Compile Include="Engine\GOLEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
