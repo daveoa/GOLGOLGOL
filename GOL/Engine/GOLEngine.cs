@@ -10,14 +10,14 @@ namespace GOL.Engine
         ConsoleWindow console;
         Displayer display;
         Board grid; // 'Game' 
-        BoardGame gridUpdate; // 'Game' 
+        BoardNextIterationCalculation gridUpdate; // 'Game' 
 
         public GOLEngine()
         {
             console = new ConsoleWindow();
             display = new Displayer();
             grid = new Board(); //substitute with 'Game' later
-            gridUpdate = new BoardGame(); //substitute with 'Game' later
+            gridUpdate = new BoardNextIterationCalculation(); //substitute with 'Game' later
         }
 
         public void Start()

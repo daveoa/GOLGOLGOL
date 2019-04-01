@@ -2,7 +2,7 @@
 
 namespace GOL.Game
 {
-    public class BoardGame
+    public class BoardNextIterationCalculation
     {
         public void NewBoardCreation(Board grid)
         {
