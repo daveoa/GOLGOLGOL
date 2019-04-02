@@ -1,4 +1,4 @@
-﻿using GOL.Engine.Display.UserOutput;
+﻿using GOL.Engine.Config;
 using System;
 
 namespace GOL.Engine.Display.Helper
@@ -7,14 +7,11 @@ namespace GOL.Engine.Display.Helper
     {
         public bool IsValid(int x)
         {
-            if (x < 0 || x > 15)
-                return false;
-            return true;
+            return x < 0 || x > 32;
         }
 
         public int ConvertToInt(string s)
         {
-            ConsoleOutput show = new ConsoleOutput();
             int x;
             try
             {
@@ -22,7 +19,7 @@ namespace GOL.Engine.Display.Helper
             }
             catch (Exception)
             {
-                show.OutputStringToConsole(ConfigSettings.InvalidInput);
+                Console.WriteLine(ConfigSettings.InvalidInput);
                 return -1;
             }
             return x;

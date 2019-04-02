@@ -1,5 +1,7 @@
-﻿using GOL.Engine.Display;
-using GOL.Engine.Display.UserInput;
+﻿using GOL.Engine.Config;
+using GOL.Engine.Display;
+using GOL.Engine.Display.Helper;
+using GOL.Engine.Game;
 using GOL.Game;
 using System.Threading;
 
@@ -7,44 +9,37 @@ namespace GOL.Engine
 {
     public class GOLEngine
     {
-        ConsoleWindow console;
-        Displayer display;
-        Board grid; // 'Game' 
-        BoardNextIterationCalculation gridUpdate; // 'Game' 
+        Displayer Display;
+        BoardGame GameBoard; 
+        NextLifecycle GridUpdate;
 
         public GOLEngine()
         {
-            console = new ConsoleWindow();
-            display = new Displayer();
-            grid = new Board(); //substitute with 'Game' later
-            gridUpdate = new BoardNextIterationCalculation(); //substitute with 'Game' later
+            Display = new Displayer();
+            GameBoard = new BoardGame();
+            GridUpdate = new NextLifecycle();
         }
 
         public void Start()
         {
-            console.ConfigureConsole();
+            Create();
+            Run();
         }
 
-        public void Create()
+        private void Create()
         {
-            display.DisplayBoard(grid);
-            display.DisplayCellCreation(grid);
+            Display.FieldCreation(GameBoard);
+            Display.DisplayBoard(GameBoard);
         }
 
-        public void Running()
+        private void Run()
         {
-            ConsoleInput esc = new ConsoleInput();
-            while (esc.ReadEscapeKeyPress())
+            while (EscapeKeyPress.ReadEscapeKeyPress())
             {
-                gridUpdate.NewBoardCreation(grid);
-                display.DisplayBoard(grid);
-                Sleep();
+                GameBoard.Grid = GridUpdate.NewBoardCreation(GameBoard);
+                Display.DisplayBoard(GameBoard);
+                Thread.Sleep(ConfigSettings.Delay);
             }
-        }
-
-        private void Sleep()
-        {
-            Thread.Sleep(ConfigSettings.Delay);
         }
     }
 }

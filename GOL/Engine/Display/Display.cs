@@ -1,37 +1,28 @@
-﻿using GOL.Engine.Display.Helper;
-using GOL.Engine.Display.UserInput;
-using GOL.Engine.Display.UserOutput;
-using GOL.Game;
+﻿using GOL.Engine.Config;
+using GOL.Engine.Display.Helper;
+using GOL.Engine.Game;
+using System;
 
 namespace GOL.Engine.Display
 {
     public class Displayer
     {
-        public void DisplayCellCreation(Board grid)
+        public void FieldCreation(Board grid)
         {
-            ConsoleOutput show = new ConsoleOutput();
-            ConsoleInput post = new ConsoleInput();
             CoordinateInput coord = new CoordinateInput();
-            BoardInput gridEdit = new BoardInput();
 
-            show.OutputStringToConsole(ConfigSettings.CellCreationNotification);
-            do
-            {
-                int x = coord.SetCoordinate(ConfigSettings.XCoordinate);
-                int y = coord.SetCoordinate(ConfigSettings.YCoordinate);
-                gridEdit.AddNewAliveCell(x, y, grid);
-                DisplayBoard(grid);
-                show.OutputStringToConsole(ConfigSettings.CellCreationInquiry);
-            } while (post.GetUserInputKey() == 'y');
-            DisplayBoard(grid);
+            Console.WriteLine(ConfigSettings.BoardCreationNotification);
+            int x = coord.SetCoordinate(ConfigSettings.Width);
+            int y = coord.SetCoordinate(ConfigSettings.Height);
+            grid.CreateNewBoard(x, y);
         }
 
         public void DisplayBoard(Board grid)
         {
             BoardToStringBuilder stringdBoard = new BoardToStringBuilder();
-            ConsoleOutput outputter = new ConsoleOutput();
-            outputter.OutputStringToConsoleDefaultPos(stringdBoard.ConvertToString(grid));
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            Console.Write(stringdBoard.ConvertToString(grid));
         }
-        
     }
 }

@@ -1,24 +1,31 @@
-﻿namespace GOL.Game
+﻿using System;
+
+namespace GOL.Engine.Game
 {
     public class Board
     {
-        private bool[,] _Grid;
+        public bool[,] Grid { get; set; }
+        public int Width { get; protected set; }
+        public int Height { get; protected set; }
 
-        public Board()
+        public void CreateNewBoard(int x, int y)
         {
-            _Grid = new bool[(int)ConfigSettings.DimensionValues.BoardWidth, (int)ConfigSettings.DimensionValues.BoardHeight];
-            //Iteration = 0;
-            //CellCount = 0;
+            Width = x;
+            Height = y;
+            Grid = new bool[Width, Height];
+            FillBoard();
         }
 
-        public bool GetValue(int x, int y)
+        private void FillBoard()
         {
-            return _Grid[x, y];
-        }
-
-        public void SetValue(int x, int y, bool value = true)
-        {
-            _Grid[x, y] = value;
+            var random = new Random();
+            for (var i = 0; i < Height; i++)
+            {
+                for (var j = 0; j < Width; j++)
+                {
+                    Grid[j, i] = random.Next(2) == 0;
+                }
+            }
         }
     }
 }

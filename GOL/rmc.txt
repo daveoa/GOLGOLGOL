@@ -1,0 +1,4 @@
+bcnotification=\nSet the size and width of field
+invalidimput=Invalid Imput
+width=Width
+height=Height
