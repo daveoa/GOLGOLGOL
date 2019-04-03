@@ -1,9 +1,9 @@
 ﻿using GOL.Engine.Config;
 using System;
 
-namespace GOL.Engine.Display.Helper
+namespace GOL.Engine.Menu.FieldSizeInput
 {
-    public class CoordinateValidator
+    public class SizeValidator
     {
         public bool IsValid(int x)
         {

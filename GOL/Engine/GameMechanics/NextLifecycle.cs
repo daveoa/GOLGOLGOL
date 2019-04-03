@@ -1,6 +1,6 @@
-﻿using GOL.Engine.Game;
+﻿using GOL.Engine.GameMechanics.Model;
 
-namespace GOL.Game
+namespace GOL.GameMechanics
 {
     public class NextLifecycle
     {
@@ -13,19 +13,36 @@ namespace GOL.Game
                 for (int x = 0; x < grid.Width; x++)
                 {
                     int neighbourCount = LiveNeighbourCount(x, y, grid);
-                    bool cellIsAlive = grid.Grid[x, y];
+                    bool isCellAlive = grid.Grid[x, y];
                     // alive AND 2 or 3 neighbours means it lives
                     // dead AND 3 neighbours are alive means it lives
                     // otherwise the cell dies
-                    bool aliveCellHasNeededNeighbours = neighbourCount == 2 || neighbourCount == 3;
-                    bool deadCellHasNeededNeighbours = neighbourCount == 3;
-                    bool cellStaysAlive = cellIsAlive && aliveCellHasNeededNeighbours;
-                    bool cellIsRevived = !cellIsAlive && deadCellHasNeededNeighbours;
-
-                    tempBoard[x, y] = cellStaysAlive || cellIsRevived;
+                    tempBoard[x, y] = DoesCellLive(isCellAlive, neighbourCount);
                 }
             }
             return tempBoard;
+        }
+
+        private bool DoesCellLive(bool isCellAlive, int neighbourCount)
+        {
+            if (isCellAlive)
+            {
+                return AliveHasNeededNeighbours(neighbourCount);
+            }
+            else
+            {
+                return DeadHasNeededNeighbours(neighbourCount);
+            }
+        }
+
+        private bool AliveHasNeededNeighbours(int neighbourCount)
+        {
+            return neighbourCount == 2 || neighbourCount == 3;
+        }
+
+        private bool DeadHasNeededNeighbours(int neighbourCount)
+        {
+            return neighbourCount == 3;
         }
 
         private int LiveNeighbourCount(int x, int y, Board grid)

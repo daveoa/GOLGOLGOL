@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace GOL.Engine.Display.Helper
+namespace GOL.Engine.Menu.FieldSizeInput
 {
-    public class CoordinateInput
+    public class SizeInput
     {
-        public int SetCoordinate(string s)
+        public int SetFieldSize(string s)
         {
-            CoordinateValidator validate = new CoordinateValidator();
+            SizeValidator validate = new SizeValidator();
 
             Console.WriteLine("\nEnter " + s + "(0 to 32):");
             string input = Console.ReadLine();

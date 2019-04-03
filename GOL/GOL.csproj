@@ -43,14 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine\Display\Display.cs" />
-    <Compile Include="Engine\Display\Helper\BoardToStringBuilder.cs" />
-    <Compile Include="Engine\Display\Helper\CoordinateInput.cs" />
-    <Compile Include="Engine\Display\Helper\CoordinateValidator.cs" />
-    <Compile Include="Engine\Display\Helper\EscapeKeyPress.cs" />
-    <Compile Include="Engine\Game\Board.cs" />
-    <Compile Include="Engine\Game\Game.cs" />
-    <Compile Include="Engine\Game\NextLifecycle.cs" />
+    <Compile Include="Engine\BoardDisplayer\BoardDisplay.cs" />
+    <Compile Include="Engine\BoardDisplayer\Builder\BoardToStringBuilder.cs" />
+    <Compile Include="Engine\Menu\ConsoleMenu.cs" />
+    <Compile Include="Engine\Menu\FieldSizeInput\SizeInput.cs" />
+    <Compile Include="Engine\Menu\FieldSizeInput\SizeValidator.cs" />
+    <Compile Include="Engine\Menu\KeyPressTrigger\EscapeKeyPress.cs" />
+    <Compile Include="Engine\GameMechanics\Model\Board.cs" />
+    <Compile Include="Engine\GameMechanics\BoardGame.cs" />
+    <Compile Include="Engine\GameMechanics\NextLifecycle.cs" />
     <Compile Include="Engine\Config\ConfigSettings.cs" />
     <Compile Include="Engine\GOLEngine.cs" />
     <Compile Include="Program.cs" />

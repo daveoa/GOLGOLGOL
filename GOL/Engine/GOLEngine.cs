@@ -1,43 +1,49 @@
-﻿using GOL.Engine.Config;
-using GOL.Engine.Display;
-using GOL.Engine.Display.Helper;
-using GOL.Engine.Game;
-using GOL.Game;
+﻿using GOL.Engine.BoardDisplayer;
+using GOL.Engine.Config;
+using GOL.Engine.GameMechanics;
+using GOL.Engine.Menu;
+using GOL.Engine.Menu.KeyPressTrigger;
+using GOL.GameMechanics;
+using System;
 using System.Threading;
 
 namespace GOL.Engine
 {
     public class GOLEngine
     {
-        Displayer Display;
-        BoardGame GameBoard; 
-        NextLifecycle GridUpdate;
+        private ConsoleMenu _menu;
+        private Displayer _display;
+        private BoardGame _gameBoard; 
+        private NextLifecycle _gridUpdate;
 
         public GOLEngine()
         {
-            Display = new Displayer();
-            GameBoard = new BoardGame();
-            GridUpdate = new NextLifecycle();
+            _display = new Displayer();
+            _gameBoard = new BoardGame();
+            _gridUpdate = new NextLifecycle();
+            _menu = new ConsoleMenu();
         }
 
         public void Start()
         {
-            Create();
+            _gameBoard = NewBoardSetup(_gameBoard);
+            _display.DisplayBoard(_gameBoard);
             Run();
         }
 
-        private void Create()
+        private BoardGame NewBoardSetup(BoardGame game)
         {
-            Display.FieldCreation(GameBoard);
-            Display.DisplayBoard(GameBoard);
+            Tuple<int, int> dimensions;
+            dimensions = _menu.FieldDimensonSetup();
+            return game.CreateNewBoard(dimensions.Item1, dimensions.Item2);
         }
 
         private void Run()
         {
             while (EscapeKeyPress.ReadEscapeKeyPress())
             {
-                GameBoard.Grid = GridUpdate.NewBoardCreation(GameBoard);
-                Display.DisplayBoard(GameBoard);
+                _gameBoard.Grid = _gridUpdate.NewBoardCreation(_gameBoard);
+                _display.DisplayBoard(_gameBoard);
                 Thread.Sleep(ConfigSettings.Delay);
             }
         }

@@ -1,12 +1,12 @@
 ﻿using GOL.Engine.Config;
-using GOL.Engine.Game;
+using GOL.Engine.GameMechanics;
 using System.Text;
 
-namespace GOL.Engine.Display.Helper
+namespace GOL.Engine.BoardDisplayer.Builder
 {
     public class BoardToStringBuilder
     {
-        public string ConvertToString(Board grid)
+        public string ConvertToString(BoardGame grid)
         {
             var boardString = new StringBuilder();
             for (int y = 0; y < grid.Height; y++)
