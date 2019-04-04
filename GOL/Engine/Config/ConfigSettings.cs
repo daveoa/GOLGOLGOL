@@ -10,6 +10,8 @@
         public static string Width { get { return "Width";} }
         public static string Height { get { return "Height";} }
         public static string InvalidInput { get { return "Invalid imput"; } }
+        public static string Iteration { get { return "Iteration: {0}"; } }
+        public static string CellCount { get { return "Cell count: {0}"; } }
 
         public static int Delay { get { return 1000; } } //1 second
     }

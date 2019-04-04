@@ -3,7 +3,6 @@ using GOL.Engine.Config;
 using GOL.Engine.GameMechanics;
 using GOL.Engine.Menu;
 using GOL.Engine.Menu.KeyPressTrigger;
-using GOL.GameMechanics;
 using System;
 using System.Threading;
 
@@ -14,20 +13,20 @@ namespace GOL.Engine
         private ConsoleMenu _menu;
         private Displayer _display;
         private BoardGame _gameBoard; 
-        private NextLifecycle _gridUpdate; //BoardGame in iteration #2
+        //private NextLifecycle _gridUpdate; //BoardGame in iteration #2
 
         public GOLEngine()
         {
             _display = new Displayer();
             _gameBoard = new BoardGame();
-            _gridUpdate = new NextLifecycle();
+            //_gridUpdate = new NextLifecycle();
             _menu = new ConsoleMenu();
         }
 
         public void Start()
         {
             _gameBoard = NewBoardSetup(_gameBoard);
-            _display.DisplayBoard(_gameBoard);
+            DisplayBoardInfo(_gameBoard);
 
             _gameBoard = Update(_gameBoard);
         }
@@ -45,11 +44,17 @@ namespace GOL.Engine
         {
             while (EscapeKeyPress.ReadEscapeKeyPress())
             {
-                game.Grid = _gridUpdate.NewBoardCreation(_gameBoard);
-                _display.DisplayBoard(_gameBoard);
+                game = game.NextIteration(game);
+                DisplayBoardInfo(game);
                 Thread.Sleep(ConfigSettings.Delay);
             }
             return game;
+        }
+
+        private void DisplayBoardInfo(BoardGame game)
+        {
+            _display.DisplayBoard(game);
+            _display.DisplayBoardStats(game);
         }
     }
 }

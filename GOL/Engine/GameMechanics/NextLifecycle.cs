@@ -1,6 +1,6 @@
 ﻿using GOL.Engine.GameMechanics.Model;
 
-namespace GOL.GameMechanics
+namespace GOL.Engine.GameMechanics
 {
     public class NextLifecycle
     {
