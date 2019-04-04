@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace GOL.Engine.Menu.KeyPressTrigger
+namespace GOL.Engine.Menu.KeyPressTriggers
 {
     public static class EscapeKeyPress
     {
-        public static bool ReadEscapeKeyPress()
+        public static bool EscIsNotPressed()
         {
             return !Console.KeyAvailable || Console.ReadKey(true).Key != ConsoleKey.Escape;
         }

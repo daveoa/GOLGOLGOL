@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GOL.Engine.GameMechanics.Model
+namespace GOL.Engine.GameMechanics.Models
 {
     public class Board
     {

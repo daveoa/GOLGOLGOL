@@ -4,10 +4,10 @@ namespace GOL.Engine.Menu.FieldSizeInput
 {
     public class SizeInput
     {
+        private SizeValidator validate = new SizeValidator();
+
         public int SetFieldSize(string s)
         {
-            SizeValidator validate = new SizeValidator();
-
             Console.WriteLine("\nEnter " + s + "(0 to 32):");
             string input = Console.ReadLine();
             int coord = validate.ConvertToInt(input);

@@ -2,8 +2,8 @@
 using GOL.Engine.Config;
 using GOL.Engine.GameMechanics;
 using GOL.Engine.Menu;
-using GOL.Engine.Menu.KeyPressTrigger;
-using System;
+using GOL.Engine.Menu.KeyPressTriggers;
+using GOL.Engine.SaveManagers;
 using System.Threading;
 
 namespace GOL.Engine
@@ -12,37 +12,38 @@ namespace GOL.Engine
     {
         private ConsoleMenu _menu;
         private Displayer _display;
-        private BoardGame _gameBoard; 
-        //private NextLifecycle _gridUpdate; //BoardGame in iteration #2
+        private BoardGame _gameBoard;
+        private SaveWriter _saveW;
 
         public GOLEngine()
         {
             _display = new Displayer();
             _gameBoard = new BoardGame();
-            //_gridUpdate = new NextLifecycle();
             _menu = new ConsoleMenu();
+            _saveW = new SaveWriter();
         }
 
         public void Start()
         {
             _gameBoard = NewBoardSetup(_gameBoard);
-            DisplayBoardInfo(_gameBoard);
+            DisplayBoardInfo(_gameBoard); 
 
             _gameBoard = Update(_gameBoard);
+
+            SaveProcedure(_gameBoard);
         }
 
         private BoardGame NewBoardSetup(BoardGame game)
         {
-            Tuple<int, int> dimensions;
             //user sets width and height
-            dimensions = _menu.FieldDimensonSetup();
+            var sizes = _menu.FieldDimensonSetup();
             //returns a randomly generated board of width * height
-            return game.CreateNewBoard(dimensions.Item1, dimensions.Item2);
+            return game.CreateNewBoard(sizes.Width, sizes.Height);
         }
 
         private BoardGame Update(BoardGame game)
         {
-            while (EscapeKeyPress.ReadEscapeKeyPress())
+            while (EscapeKeyPress.EscIsNotPressed())
             {
                 game = game.NextIteration(game);
                 DisplayBoardInfo(game);
@@ -55,6 +56,19 @@ namespace GOL.Engine
         {
             _display.DisplayBoard(game);
             _display.DisplayBoardStats(game);
+        }
+
+        private bool SaveProcedure(BoardGame game)
+        {
+            if (_menu.WantsToSaveGame())
+            {
+                var filename = _menu.GetFilenameFromInput();
+                if (_saveW.SaveToFile(filename, game))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

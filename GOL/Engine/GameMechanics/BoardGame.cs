@@ -1,4 +1,4 @@
-﻿using GOL.Engine.GameMechanics.Model;
+﻿using GOL.Engine.GameMechanics.Models;
 using System;
 
 namespace GOL.Engine.GameMechanics
@@ -9,45 +9,45 @@ namespace GOL.Engine.GameMechanics
 
         public BoardGame CreateNewBoard(int x, int y)
         {
-            BoardGame grid = new BoardGame();
-            grid.Width = x;
-            grid.Height = y;
-            grid.Iteration = 0;
-            grid.Grid = new bool[grid.Width, grid.Height];
-            grid = FillBoard(grid);
-            grid.CellCount = CountCells(grid);
-            return grid;
+            BoardGame table = new BoardGame();
+            table.Width = x;
+            table.Height = y;
+            table.Iteration = 0;
+            table.Grid = new bool[table.Width, table.Height];
+            table = FillBoard(table);
+            table.CellCount = CountCells(table);
+            return table;
         }
 
-        public BoardGame FillBoard(BoardGame grid)
+        public BoardGame FillBoard(BoardGame table)
         {
             var random = new Random();
-            for (var i = 0; i < grid.Height; i++)
+            for (var i = 0; i < table.Height; i++)
             {
-                for (var j = 0; j < grid.Width; j++)
+                for (var j = 0; j < table.Width; j++)
                 {
-                    grid.Grid[j, i] = random.Next(2) == 0;
+                    table.Grid[j, i] = random.Next(2) == 0;
                 }
             }
-            return grid;
+            return table;
         }
 
-        public BoardGame NextIteration(BoardGame grid)
+        public BoardGame NextIteration(BoardGame table)
         {
-            grid.Grid = _update.NewBoardCreation(grid);
-            grid.CellCount = CountCells(grid);
-            grid.Iteration += 1;
-            return grid;
+            table.Grid = _update.NewBoardCreation(table);
+            table.CellCount = CountCells(table);
+            table.Iteration += 1;
+            return table;
         }
 
-        private int CountCells(BoardGame grid)
+        private int CountCells(BoardGame table)
         {
             int cellCount = 0;
-            for (var i = 0; i < grid.Height; i++)
+            for (var i = 0; i < table.Height; i++)
             {
-                for (var j = 0; j < grid.Width; j++)
+                for (var j = 0; j < table.Width; j++)
                 {
-                    if (grid.Grid[j, i]) cellCount++;
+                    if (table.Grid[j, i]) cellCount++;
                 }
             }
             return cellCount;

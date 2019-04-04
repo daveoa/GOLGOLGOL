@@ -1,19 +1,19 @@
-﻿using GOL.Engine.GameMechanics.Model;
+﻿using GOL.Engine.GameMechanics.Models;
 
 namespace GOL.Engine.GameMechanics
 {
     public class NextLifecycle
     {
-        public bool[,] NewBoardCreation(Board grid)
+        public bool[,] NewBoardCreation(Board table)
         {
-            bool[,] tempBoard = new bool[grid.Width, grid.Height];
+            bool[,] tempBoard = new bool[table.Width, table.Height];
 
-            for (int y = 0; y < grid.Height; y++)
+            for (int y = 0; y < table.Height; y++)
             {
-                for (int x = 0; x < grid.Width; x++)
+                for (int x = 0; x < table.Width; x++)
                 {
-                    int neighbourCount = LiveNeighbourCount(x, y, grid);
-                    bool isCellAlive = grid.Grid[x, y];
+                    int neighbourCount = LiveNeighbourCount(x, y, table);
+                    bool isCellAlive = table.Grid[x, y];
                     // alive AND 2 or 3 neighbours means it lives
                     // dead AND 3 neighbours are alive means it lives
                     // otherwise the cell dies
@@ -27,41 +27,30 @@ namespace GOL.Engine.GameMechanics
         {
             if (isCellAlive)
             {
-                return AliveHasNeededNeighbours(neighbourCount);
+                return neighbourCount == 2 || neighbourCount == 3;
             }
             else
             {
-                return DeadHasNeededNeighbours(neighbourCount);
+                return neighbourCount == 3;
             }
         }
 
-        private bool AliveHasNeededNeighbours(int neighbourCount)
-        {
-            return neighbourCount == 2 || neighbourCount == 3;
-        }
-
-        private bool DeadHasNeededNeighbours(int neighbourCount)
-        {
-            return neighbourCount == 3;
-        }
-
-        private int LiveNeighbourCount(int x, int y, Board grid)
+        private int LiveNeighbourCount(int x, int y, Board table)
         {
             int count = 0;
-            for (int i = y - 1; i <= y + 1; i++)
+            for (int offsetHeight = y - 1; offsetHeight <= y + 1; offsetHeight++)
             {
-                if (i < 0 || i >= grid.Height)
+                if (offsetHeight < 0 || offsetHeight >= table.Height)
                     continue;
-                for (int j = x - 1; j <= x + 1; j++)
+                for (int offsetWidth = x - 1; offsetWidth <= x + 1; offsetWidth++)
                 {
-                    if (j < 0 || j >= grid.Width)
+                    if (offsetWidth < 0 || offsetWidth >= table.Width)
                         continue;
-                    if (grid.Grid[j, i])
+                    if (table.Grid[offsetWidth, offsetHeight])
                         count++;
                 }
             }
-            //the nested loop counts the x,y value, so if it is alive, we substract it
-            if (grid.Grid[x, y])
+            if (table.Grid[x, y])
                 count--;
             return count;
         }
