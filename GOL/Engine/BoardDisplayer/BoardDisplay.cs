@@ -1,8 +1,5 @@
 ﻿using GOL.Engine.BoardDisplayer.Builder;
-using GOL.Engine.Config;
 using GOL.Engine.GameMechanics;
-using GOL.Engine.GameMechanics.Model;
-using GOL.Engine.Menu.FieldSizeInput;
 using System;
 
 namespace GOL.Engine.BoardDisplayer

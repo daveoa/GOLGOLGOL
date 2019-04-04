@@ -1,5 +1,4 @@
 ﻿using GOL.Engine.Config;
-using GOL.Engine.GameMechanics;
 using GOL.Engine.Menu.FieldSizeInput;
 using System;
 

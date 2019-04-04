@@ -14,7 +14,7 @@ namespace GOL.Engine
         private ConsoleMenu _menu;
         private Displayer _display;
         private BoardGame _gameBoard; 
-        private NextLifecycle _gridUpdate;
+        private NextLifecycle _gridUpdate; //BoardGame in iteration #2
 
         public GOLEngine()
         {
@@ -28,24 +28,28 @@ namespace GOL.Engine
         {
             _gameBoard = NewBoardSetup(_gameBoard);
             _display.DisplayBoard(_gameBoard);
-            Run();
+
+            _gameBoard = Update(_gameBoard);
         }
 
         private BoardGame NewBoardSetup(BoardGame game)
         {
             Tuple<int, int> dimensions;
+            //user sets width and height
             dimensions = _menu.FieldDimensonSetup();
+            //returns a randomly generated board of width * height
             return game.CreateNewBoard(dimensions.Item1, dimensions.Item2);
         }
 
-        private void Run()
+        private BoardGame Update(BoardGame game)
         {
             while (EscapeKeyPress.ReadEscapeKeyPress())
             {
-                _gameBoard.Grid = _gridUpdate.NewBoardCreation(_gameBoard);
+                game.Grid = _gridUpdate.NewBoardCreation(_gameBoard);
                 _display.DisplayBoard(_gameBoard);
                 Thread.Sleep(ConfigSettings.Delay);
             }
+            return game;
         }
     }
 }
