@@ -45,7 +45,10 @@
   <ItemGroup>
     <Compile Include="Engine\BoardDisplayer\BoardDisplay.cs" />
     <Compile Include="Engine\BoardDisplayer\Builders\BoardToStringBuilder.cs" />
-    <Compile Include="Engine\GameMechanics\Models\Coordinates.cs" />
+    <Compile Include="Engine\SaveManagers\Converters\CoordinateListToGrid.cs" />
+    <Compile Include="Engine\SaveManagers\Converters\SavefileStringToGrid.cs" />
+    <Compile Include="Engine\SaveManagers\Converters\StringToCoordinateList.cs" />
+    <Compile Include="Engine\SaveManagers\Models\Coordinates.cs" />
     <Compile Include="Engine\GameMechanics\Models\Dimensions.cs" />
     <Compile Include="Engine\Menu\ConsoleMenu.cs" />
     <Compile Include="Engine\Menu\FieldSizeInput\SizeInput.cs" />
@@ -53,11 +56,11 @@
     <Compile Include="Engine\Menu\KeyPressTriggers\EscapeKeyPress.cs" />
     <Compile Include="Engine\GameMechanics\Models\Board.cs" />
     <Compile Include="Engine\GameMechanics\BoardGame.cs" />
-    <Compile Include="Engine\GameMechanics\NextLifecycle.cs" />
     <Compile Include="Engine\Config\ConfigSettings.cs" />
     <Compile Include="Engine\GOLEngine.cs" />
     <Compile Include="Engine\SaveManagers\Builders\PathBuilder.cs" />
     <Compile Include="Engine\SaveManagers\Converters\FromGridToList.cs" />
+    <Compile Include="Engine\SaveManagers\Models\FileLoadResult.cs" />
     <Compile Include="Engine\SaveManagers\SaveLoader.cs" />
     <Compile Include="Engine\SaveManagers\SaveWriter.cs" />
     <Compile Include="Program.cs" />

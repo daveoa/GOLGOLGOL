@@ -5,7 +5,7 @@ using System;
 
 namespace GOL.Engine.Menu
 {
-    class ConsoleMenu
+    public class ConsoleMenu
     {
         private SizeInput _coord = new SizeInput();
 
@@ -19,17 +19,27 @@ namespace GOL.Engine.Menu
             return result;
         }
 
-        public string GetFilenameFromInput()
+        public string GetFilenameFromInput(string s)
         {
             string filename;
-            Console.WriteLine("\nEnter the name for this game:");
+            Console.WriteLine(s);
             filename = Console.ReadLine();
             return filename;
         }
 
         public bool WantsToSaveGame()
         {
-            Console.WriteLine("\nSave game to file? (y/n)");
+            Console.WriteLine(ConfigSettings.SaveInquiry);
+            if (Console.ReadKey().KeyChar == ConfigSettings.ConfirmationKey)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool WantsToLoadGame()
+        {
+            Console.WriteLine(ConfigSettings.LoadInquiry);
             if (Console.ReadKey().KeyChar == ConfigSettings.ConfirmationKey)
             {
                 return true;

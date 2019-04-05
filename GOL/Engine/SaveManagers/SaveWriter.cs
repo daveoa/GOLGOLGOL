@@ -14,8 +14,8 @@ namespace GOL.Engine.SaveManagers
 
         public bool SaveToFile(string filename, BoardGame game)
         {
-            var AliveCellList = _converter.ConvertToList(game);
             var path = _pathBuild.Build(filename);
+            var AliveCellList = _converter.ConvertToList(game);
 
             try
             {
@@ -25,10 +25,9 @@ namespace GOL.Engine.SaveManagers
                     {
                         writer.Write($"{coord.X},{coord.Y} ");
                     }
-                    writer.Write("\n");
+                    writer.Write(Environment.NewLine);
                     writer.WriteLine(game.Width);
                     writer.WriteLine(game.Height);
-                    writer.WriteLine(game.CellCount);
                     writer.WriteLine(game.Iteration);
                 }
             }

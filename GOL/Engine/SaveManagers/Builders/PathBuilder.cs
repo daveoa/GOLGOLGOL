@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using GOL.Engine.Config;
+using System.IO;
 
 namespace GOL.Engine.SaveManagers.Builders
 {
@@ -7,7 +8,7 @@ namespace GOL.Engine.SaveManagers.Builders
         public string Build(string filename)
         {
             var path = filename + ".save";
-            path = Path.Combine(@"C:\Users\deivs.oskars.alksnis\", filename);
+            path = Path.Combine(ConfigSettings.Path, filename);
             return path;
         }
     }

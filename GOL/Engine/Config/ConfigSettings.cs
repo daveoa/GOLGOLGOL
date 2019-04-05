@@ -12,6 +12,11 @@
         public static string InvalidInput => "Invalid input";
         public static string Iteration => "Iteration: {0}";
         public static string CellCount => "Cell count: {0}";
+        public static string Path => @"C:\Users\deivs.oskars.alksnis\";
+        public static string SaveNameInquiry => "\nEnter the name for this game:";
+        public static string LoadNameInquiry => "\nEnter the name for loadable save:";
+        public static string SaveInquiry => "\nSave game to file? (y/n)";
+        public static string LoadInquiry => "\nLoad game from file? (y/n)";
 
         public static int Delay => 1000; //1 second
     }

@@ -4,6 +4,7 @@ using GOL.Engine.GameMechanics;
 using GOL.Engine.Menu;
 using GOL.Engine.Menu.KeyPressTriggers;
 using GOL.Engine.SaveManagers;
+using GOL.Engine.SaveManagers.Models;
 using System.Threading;
 
 namespace GOL.Engine
@@ -14,6 +15,7 @@ namespace GOL.Engine
         private Displayer _display;
         private BoardGame _gameBoard;
         private SaveWriter _saveW;
+        private SaveLoader _saveL;
 
         public GOLEngine()
         {
@@ -21,50 +23,69 @@ namespace GOL.Engine
             _gameBoard = new BoardGame();
             _menu = new ConsoleMenu();
             _saveW = new SaveWriter();
+            _saveL = new SaveLoader();
         }
 
         public void Start()
         {
-            _gameBoard = NewBoardSetup(_gameBoard);
-            DisplayBoardInfo(_gameBoard); 
-
-            _gameBoard = Update(_gameBoard);
-
-            SaveProcedure(_gameBoard);
+            bool isSuccess = this.LoadProcedure();
+            if (!isSuccess)
+            {
+                _gameBoard = this.NewBoardSetup();
+            }
+            this.DisplayBoardInfo(); 
+            _gameBoard = this.Update();
+            this.SaveProcedure();
         }
 
-        private BoardGame NewBoardSetup(BoardGame game)
+        private BoardGame NewBoardSetup()
         {
             //user sets width and height
             var sizes = _menu.FieldDimensonSetup();
             //returns a randomly generated board of width * height
-            return game.CreateNewBoard(sizes.Width, sizes.Height);
+            return _gameBoard.CreateNewBoard(sizes.Width, sizes.Height);
         }
 
-        private BoardGame Update(BoardGame game)
+        private BoardGame Update()
         {
             while (EscapeKeyPress.EscIsNotPressed())
             {
-                game = game.NextIteration(game);
-                DisplayBoardInfo(game);
+                _gameBoard.NextIteration();
+                this.DisplayBoardInfo();
                 Thread.Sleep(ConfigSettings.Delay);
             }
-            return game;
+            return _gameBoard;
         }
 
-        private void DisplayBoardInfo(BoardGame game)
+        private void DisplayBoardInfo()
         {
-            _display.DisplayBoard(game);
-            _display.DisplayBoardStats(game);
+            _display.DisplayBoard(_gameBoard);
+            _display.DisplayBoardStats(_gameBoard);
         }
 
-        private bool SaveProcedure(BoardGame game)
+        private bool SaveProcedure()
         {
             if (_menu.WantsToSaveGame())
             {
-                var filename = _menu.GetFilenameFromInput();
-                if (_saveW.SaveToFile(filename, game))
+                var filename = _menu.GetFilenameFromInput(ConfigSettings.SaveNameInquiry);
+                if (_saveW.SaveToFile(filename, _gameBoard))
                 {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool LoadProcedure()
+        {
+            if (_menu.WantsToLoadGame())
+            {
+                var loadResult = new FileLoadResult();
+                var filename = _menu.GetFilenameFromInput(ConfigSettings.LoadNameInquiry);
+                loadResult = _saveL.LoadFromFile(filename);
+                if (loadResult.isLoadSuccessful)
+                {
+                    _gameBoard = loadResult.gameFromSave;
                     return true;
                 }
             }
